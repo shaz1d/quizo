@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import SignIn from "@/components/sign-in";
 import SignOut from "@/components/sign-out";
+import CreateQuizForm from "@/components/create-quiz";
 
 export default async function Home() {
   const session = await auth();
@@ -34,6 +35,9 @@ export default async function Home() {
         </div>
         <div className="flex items-center justify-center">
           {session?.user ? "Logged In" : "Not Logged In"}
+        </div>
+        <div className="mx-auto w-full max-w-[400px]">
+          <CreateQuizForm />
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
