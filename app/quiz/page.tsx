@@ -1,4 +1,5 @@
 import axios from "axios";
+import Link from "next/link";
 
 type QuizProps = {
   id: number;
@@ -13,7 +14,9 @@ const page = async () => {
     <>
       <h1>Quiz Page</h1>
       {quizes.map((quiz: QuizProps) => (
-        <div key={quiz.id}>{quiz.topic}</div>
+        <Link href={`/quiz/${quiz.id}`} key={quiz.id}>
+          {quiz.topic}
+        </Link>
       ))}
     </>
   );

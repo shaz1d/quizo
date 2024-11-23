@@ -29,7 +29,7 @@ export async function POST(req: Request) {
             question: question.title,
             answer: question.answer,
             quizId: quiz.id,
-            options: JSON.stringify(question.options),
+            options: [...question.options, question.answer],
           },
         });
       })
