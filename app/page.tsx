@@ -104,32 +104,33 @@ export default async function Home() {
                   <CardDescription>Users List</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {users.map((user) => {
-                    return (
-                      <div
-                        key={user.id}
-                        className="flex items-center justify-between space-x-4"
-                      >
-                        <div className="flex items-center space-x-4">
-                          <Avatar>
-                            <AvatarImage src={user.image} />
-                            <AvatarFallback>
-                              {user.name?.charAt(0)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <p className="text-sm font-medium leading-none">
-                              {user.name}
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                              {user.email}
-                            </p>
+                  {users &&
+                    users.map((user) => {
+                      return (
+                        <div
+                          key={user.id}
+                          className="flex items-center justify-between space-x-4"
+                        >
+                          <div className="flex items-center space-x-4">
+                            <Avatar>
+                              <AvatarImage src={user.image as string} />
+                              <AvatarFallback>
+                                {user.name?.charAt(0)}
+                              </AvatarFallback>
+                            </Avatar>
+                            <div>
+                              <p className="text-sm font-medium leading-none">
+                                {user.name}
+                              </p>
+                              <p className="text-sm text-muted-foreground">
+                                {user.email}
+                              </p>
+                            </div>
                           </div>
+                          <p>{user.isAdmin ? "admin" : "user"}</p>
                         </div>
-                        <p>{user.isAdmin ? "admin" : "user"}</p>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </CardContent>
               </Card>
             </TabsContent>
