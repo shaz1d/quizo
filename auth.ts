@@ -11,4 +11,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     strategy: "jwt",
   },
   providers: [GitHub, Google],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        const dbUser = await db.user.findUnique({
+          where: {
+            email: user.email as string,
+          },
+        });
+        if (dbUser) {
+          token.isAdmin = dbUser.isAdmin;
+        }
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token.isAdmin !== undefined) {
+        session.user.isAdmin = token.isAdmin;
+      }
+      return session;
+    },
+  },
 });
