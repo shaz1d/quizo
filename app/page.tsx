@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import Navbar from "@/components/navbar";
+import QuizContent from "@/components/quiz-content";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,9 +12,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getQuizs, getUsers } from "@/lib/actions";
-import { db } from "@/lib/db";
 import { cn } from "@/lib/utils";
-import { MessageCircleQuestion, Play } from "lucide-react";
 
 import { redirect } from "next/navigation";
 
@@ -26,13 +25,14 @@ export default async function Home() {
   const isAdmin = session.user.isAdmin;
 
   const quizes = await getQuizs();
+
   const users = await getUsers();
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px]  justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <Navbar user={session.user} />
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Tabs defaultValue="quizes" className="w-[500px]">
+        <Tabs defaultValue="quizes" className="w-[450px]">
           <TabsList
             className={cn(
               "w-full grid",
@@ -54,36 +54,7 @@ export default async function Home() {
               </CardHeader>
 
               <CardContent className="space-y-2">
-                {quizes.map(async (quiz) => {
-                  const hasPlayed = await db.playedQuiz.findMany({
-                    where: {
-                      userId: session.user?.id,
-                      quizId: quiz.id,
-                    },
-                  });
-                  console.log(hasPlayed);
-                  return (
-                    <div
-                      key={quiz.id}
-                      className="-mx-2 flex items-start justify-between gap-4 space-x-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground"
-                    >
-                      <div className="flex gap-2">
-                        <MessageCircleQuestion className="size-6" />
-                        <div className="space-y-1">
-                          <p className="text-sm font-medium leading-none">
-                            {quiz.topic}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            Contains {quiz.questions.length} questions
-                          </p>
-                        </div>
-                      </div>
-                      <Button>
-                        <Play /> Play
-                      </Button>
-                    </div>
-                  );
-                })}
+                <QuizContent quizes={quizes} />
               </CardContent>
             </Card>
           </TabsContent>
