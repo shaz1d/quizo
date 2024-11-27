@@ -1,8 +1,8 @@
 import { auth } from "@/auth";
+import { DrawerQuiz } from "@/components/drawer";
 import Navbar from "@/components/navbar";
 import QuizContent from "@/components/quiz-content";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -50,7 +50,7 @@ export default async function Home() {
                   <CardTitle>Quizs</CardTitle>
                   <CardDescription>Quiz List</CardDescription>
                 </div>
-                {isAdmin && <Button variant="outline">Create Quiz</Button>}
+                {isAdmin && <DrawerQuiz />}
               </CardHeader>
 
               <CardContent className="space-y-2">
@@ -74,7 +74,7 @@ export default async function Home() {
                   <CardTitle>Users</CardTitle>
                   <CardDescription>Users List</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="space-y-2 flex flex-col gap-1">
                   {users &&
                     users.map((user) => {
                       return (
