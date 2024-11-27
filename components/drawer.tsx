@@ -19,15 +19,17 @@ export function DrawerQuiz() {
       <DrawerTrigger asChild>
         <Button variant="outline">Create Quiz</Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <div className="mx-auto w-full max-w-sm">
+      <DrawerContent className="font-[family-name:var(--font-geist-sans)]">
+        <div className="mx-auto w-full max-w-lg">
           <DrawerHeader>
             <DrawerTitle>Create A New Quiz</DrawerTitle>
             <DrawerDescription>Set your daily activity goal.</DrawerDescription>
           </DrawerHeader>
 
-          <DrawerFooter>
+          <div className="px-4">
             <CreateQuizForm />
+          </div>
+          <DrawerFooter className="pt-1">
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>
             </DrawerClose>
