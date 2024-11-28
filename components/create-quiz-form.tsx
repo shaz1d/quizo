@@ -17,14 +17,16 @@ import { Plus, Trash } from "lucide-react";
 import { ScrollArea } from "./ui/scroll-area";
 
 const quizSchema = z.object({
-  title: z.string(),
-  questions: z.array(
-    z.object({
-      title: z.string(),
-      options: z.array(z.string()).min(3).max(3),
-      answer: z.string().min(1),
-    })
-  ),
+  title: z.string().min(1),
+  questions: z
+    .array(
+      z.object({
+        title: z.string().min(1),
+        options: z.array(z.string().min(1).max(20)).min(3).max(3),
+        answer: z.string().min(1).max(20),
+      })
+    )
+    .min(1),
 });
 
 export function CreateQuizForm() {
@@ -42,9 +44,6 @@ export function CreateQuizForm() {
   function onSubmit(values: z.infer<typeof quizSchema>) {
     console.log(values);
   }
-
-  const values = form.watch();
-  console.log(values);
 
   return (
     <Form {...form}>
@@ -112,6 +111,7 @@ export function CreateQuizForm() {
                       <FormControl>
                         <Input placeholder="Enter the question" {...field} />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -127,6 +127,7 @@ export function CreateQuizForm() {
                           <FormControl>
                             <Input placeholder={`Option ${i + 1}`} {...field} />
                           </FormControl>
+                          <FormMessage />
                         </FormItem>
                       )}
                     />
@@ -140,6 +141,7 @@ export function CreateQuizForm() {
                         <FormControl>
                           <Input placeholder="Answer" {...field} />
                         </FormControl>
+                        <FormMessage />
                       </FormItem>
                     )}
                   />

@@ -15,7 +15,7 @@ const Navbar = ({ user }: { user: User }) => {
   return (
     <header className="w-full flex justify-between items-center gap-5 max-w-xl">
       <Link href="/" className="flex items-center gap-2 font-semibold">
-        <Icons.logo className="size-5" /> Quizo
+        <Icons.newLogo className="size-8" /> Quizo
       </Link>
       <DropdownMenu>
         <DropdownMenuTrigger>
