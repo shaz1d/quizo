@@ -13,7 +13,7 @@ import SignOut from "./sign-out";
 
 const Navbar = ({ user }: { user: User }) => {
   return (
-    <header className="w-full flex justify-between items-center gap-5 max-w-xl">
+    <header className="w-full flex justify-between items-center gap-5 max-w-xl sticky top-0">
       <Link href="/" className="flex items-center gap-2 font-semibold">
         <Icons.newLogo className="size-8" /> Quizo
       </Link>

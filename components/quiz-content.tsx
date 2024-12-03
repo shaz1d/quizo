@@ -1,6 +1,7 @@
 import { MessageCircleQuestion, Play } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
+import { ScrollArea } from "./ui/scroll-area";
 
 type Props = {
   quizes: {
@@ -16,29 +17,33 @@ type Props = {
 
 const QuizContent = ({ quizes }: Props) => {
   return (
-    <>
-      {quizes.map((quiz) => {
-        return (
-          <div
-            key={quiz.id}
-            className="-mx-2 flex items-start justify-between gap-4 space-x-4 rounded-md p-2 transition-all hover:bg-accent hover:text-accent-foreground"
-          >
-            <div className="flex gap-2">
-              <MessageCircleQuestion className="size-6" />
-              <div className="space-y-1">
-                <p className="text-sm font-medium leading-none">{quiz.topic}</p>
-                <p className="text-sm text-muted-foreground">
-                  Contains {quiz.questions.length} questions
-                </p>
+    <ScrollArea className="px-6  h-64">
+      <div className="flex flex-col gap-5">
+        {quizes.map((quiz) => {
+          return (
+            <div
+              key={quiz.id}
+              className="flex items-start justify-between gap-4 space-x-4 rounded-md"
+            >
+              <div className="flex gap-2">
+                <MessageCircleQuestion className="size-6" />
+                <div className="space-y-1">
+                  <p className="text-sm font-medium leading-none">
+                    {quiz.topic}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Contains {quiz.questions.length} questions
+                  </p>
+                </div>
               </div>
+              <Button>
+                <Play /> Play
+              </Button>
             </div>
-            <Button>
-              <Play /> Play
-            </Button>
-          </div>
-        );
-      })}
-    </>
+          );
+        })}
+      </div>
+    </ScrollArea>
   );
 };
 

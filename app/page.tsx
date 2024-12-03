@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import { DrawerQuiz } from "@/components/drawer";
+import Leaderboard from "@/components/leaderboard";
 import Navbar from "@/components/navbar";
 import QuizContent from "@/components/quiz-content";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -29,7 +30,7 @@ export default async function Home() {
   const users = await getUsers();
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px]  justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px]  justify-items-center min-h-screen p-4 pb-20 gap-10 sm:p-8 font-[family-name:var(--font-geist-sans)]">
       <Navbar user={session.user} />
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Tabs defaultValue="quizes" className="w-[450px]">
@@ -53,7 +54,7 @@ export default async function Home() {
                 {isAdmin && <DrawerQuiz />}
               </CardHeader>
 
-              <CardContent className="space-y-2">
+              <CardContent className="space-y-2 px-0">
                 <QuizContent quizes={quizes} />
               </CardContent>
             </Card>
@@ -62,9 +63,10 @@ export default async function Home() {
             <Card>
               <CardHeader>
                 <CardTitle>Leaderboard</CardTitle>
-                <CardDescription>Player List</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-2"></CardContent>
+              <CardContent className="space-y-2 px-0">
+                <Leaderboard />
+              </CardContent>
             </Card>
           </TabsContent>
           {isAdmin && (
