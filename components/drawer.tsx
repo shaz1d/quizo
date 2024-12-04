@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -12,12 +11,16 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { CreateQuizForm } from "./create-quiz-form";
+import { useDrawer } from "@/hooks/globalStates";
 
 export function DrawerQuiz() {
+  const { isOpen, open, close } = useDrawer();
   return (
-    <Drawer>
+    <Drawer open={isOpen} onClose={() => close()}>
       <DrawerTrigger asChild>
-        <Button variant="outline">Create Quiz</Button>
+        <Button variant="outline" onClick={() => open()}>
+          Create Quiz
+        </Button>
       </DrawerTrigger>
       <DrawerContent className="font-[family-name:var(--font-geist-sans)]">
         <div className="mx-auto w-full max-w-lg">
@@ -26,13 +29,8 @@ export function DrawerQuiz() {
             <DrawerDescription>Set your daily activity goal.</DrawerDescription>
           </DrawerHeader>
 
-          <div className="px-4">
-            <CreateQuizForm />
-          </div>
           <DrawerFooter className="pt-1">
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
+            <CreateQuizForm />
           </DrawerFooter>
         </div>
       </DrawerContent>

@@ -30,8 +30,9 @@ export default async function Home() {
   const users = await getUsers();
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px]  justify-items-center min-h-screen p-4 pb-20 gap-10 sm:p-8 font-[family-name:var(--font-geist-sans)]">
-      <Navbar user={session.user} />
+    <>
+      {" "}
+      <Navbar />
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <Tabs defaultValue="quizes" className="w-[450px]">
           <TabsList
@@ -48,8 +49,8 @@ export default async function Home() {
             <Card>
               <CardHeader className="flex-row justify-between items-start space-y-0">
                 <div className="space-y-1.5">
-                  <CardTitle>Quizs</CardTitle>
-                  <CardDescription>Quiz List</CardDescription>
+                  <CardTitle>Quizes</CardTitle>
+                  <CardDescription>{quizes.length} Quizes</CardDescription>
                 </div>
                 {isAdmin && <DrawerQuiz />}
               </CardHeader>
@@ -110,7 +111,6 @@ export default async function Home() {
           )}
         </Tabs>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center"></footer>
-    </div>
+    </>
   );
 }

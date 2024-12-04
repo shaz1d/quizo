@@ -2,6 +2,7 @@ import { MessageCircleQuestion, Play } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
+import Link from "next/link";
 
 type Props = {
   quizes: {
@@ -36,9 +37,11 @@ const QuizContent = ({ quizes }: Props) => {
                   </p>
                 </div>
               </div>
-              <Button>
-                <Play /> Play
-              </Button>
+              <Link href={`/play/${quiz.id}`}>
+                <Button>
+                  <Play /> Play
+                </Button>
+              </Link>
             </div>
           );
         })}
