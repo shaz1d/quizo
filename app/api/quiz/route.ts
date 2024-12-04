@@ -24,12 +24,14 @@ export async function POST(req: Request) {
     });
     await Promise.all(
       questions.map(async (question: QuestionProps) => {
+        let options = [...question.options, question.answer];
+        options = options.sort(() => Math.random() - 0.5);
         await db.question.create({
           data: {
             question: question.title,
             answer: question.answer,
             quizId: quiz.id,
-            options: [...question.options, question.answer],
+            options,
           },
         });
       })

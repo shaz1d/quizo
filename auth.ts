@@ -26,7 +26,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
   },
-  providers: [GitHub, Google],
+  providers: [
+    GitHub,
+    Google({ authorization: { params: { prompt: "select_account" } } }),
+  ],
   callbacks: {
     async jwt({ token, user }) {
       if (user) {

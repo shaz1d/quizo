@@ -15,6 +15,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Plus, Trash } from "lucide-react";
 import { ScrollArea } from "./ui/scroll-area";
+import axios from "axios";
+import { useDrawer } from "@/hooks/globalStates";
+import { useRouter } from "next/navigation";
 
 const quizSchema = z.object({
   title: z.string().min(1),
@@ -30,6 +33,8 @@ const quizSchema = z.object({
 });
 
 export function CreateQuizForm() {
+  const { close } = useDrawer();
+  const router = useRouter();
   const form = useForm<z.infer<typeof quizSchema>>({
     resolver: zodResolver(quizSchema),
     defaultValues: {
@@ -41,8 +46,13 @@ export function CreateQuizForm() {
     name: "questions",
     control: form.control,
   });
-  function onSubmit(values: z.infer<typeof quizSchema>) {
-    console.log(values);
+
+  async function onSubmit(values: z.infer<typeof quizSchema>) {
+    const res = await axios.post("/api/quiz", values);
+    console.log(res.data);
+    form.reset();
+    close();
+    router.refresh();
   }
 
   return (
@@ -150,10 +160,12 @@ export function CreateQuizForm() {
             ))}
           </div>
         </ScrollArea>
-        <Button className="mt-4 w-full" type="submit">
-          {" "}
-          Create Quiz
-        </Button>
+        <div className="w-full flex justify-between items-center gap-5 mt-2">
+          <Button type="button" variant="secondary" onClick={() => close()}>
+            Cancel
+          </Button>
+          <Button type="submit">Create Quiz</Button>
+        </div>
       </form>
     </Form>
   );

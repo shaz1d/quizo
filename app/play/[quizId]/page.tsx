@@ -1,3 +1,5 @@
+import Navbar from "@/components/navbar";
+import PlayQuiz from "@/components/play-quiz";
 import { db } from "@/lib/db";
 
 type Props = {
@@ -13,26 +15,24 @@ const page = async ({ params: { quizId } }: Props) => {
       questions: {
         select: {
           id: true,
-          question: true,
 
+          question: true,
           options: true,
         },
       },
     },
   });
+
+  if (!quiz) {
+    return <div>Quiz not found</div>;
+  }
+
   return (
     <>
-      <h1>Single Quiz Page</h1>
-
-      {quiz?.questions.map((question) => (
-        <div key={question.id}>
-          <h2>{question.question}</h2>
-          <h3>Options:</h3>
-          {question.options.map((option, i) => {
-            return <p key={i}>{option}</p>;
-          })}
-        </div>
-      ))}
+      <Navbar />
+      <div className="w-full max-w-lg mx-auto">
+        <PlayQuiz quiz={quiz} />
+      </div>
     </>
   );
 };
