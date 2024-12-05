@@ -1,21 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Card, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
+import axios from "axios";
 
 type QuizProp = {
   quiz: {
+    id: string;
+    topic: string;
     questions: {
       question: string;
       id: string;
       options: string[];
     }[];
-  } & {
-    id: string;
-    createdAt: Date;
-    updatedAt: Date;
-    topic: string;
   };
 };
 
@@ -24,13 +22,41 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
   const [selectedAnswers, setSelectedAnswers] = useState<
     Record<string, string>
   >({});
-  const [timeLeft, setTimeLeft] = useState(300);
+  const [timeLeft, setTimeLeft] = useState(5);
 
+  const handleOptionSelect = (questionId: string, option: string) => {
+    const updatedAnswers = {
+      ...selectedAnswers,
+      [questionId]: option,
+    };
+    setSelectedAnswers(updatedAnswers);
+    // Move to the next question
+    if (currentQuestionIndex < quiz!.questions.length - 1) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+    } else {
+      handleSubmit(updatedAnswers); // Submit when the last question is answered
+    }
+  };
+
+  const handleSubmit = useCallback(
+    async (answers?: Record<string, string>) => {
+      console.log("Selected Answers:", selectedAnswers);
+      // Send `selectedAnswers` to your API for validation
+      const userAnswers = answers || selectedAnswers;
+      const res = await axios.post("/api/check", {
+        quizId: quiz.id,
+        userAnswers,
+      });
+
+      console.log(res.data);
+    },
+    [selectedAnswers, quiz.id]
+  );
   // Timer logic
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
-        if (prevTime <= 1) {
+        if (prevTime < 1) {
           clearInterval(timer);
           handleSubmit();
           return 0;
@@ -40,44 +66,28 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
-
-  const handleOptionSelect = (questionId: string, option: string) => {
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [questionId]: option,
-    }));
-    // Move to the next question
-    if (currentQuestionIndex < quiz!.questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
-    } else {
-      handleSubmit(); // Submit when the last question is answered
-    }
-  };
-
-  const handleSubmit = async () => {
-    console.log("Selected Answers:", selectedAnswers);
-    // Send `selectedAnswers` to your API for validation
-
-    alert("Quiz submitted!"); // Replace with proper navigation or feedback
-  };
+  }, [handleSubmit]);
 
   const currentQuestion = quiz.questions[currentQuestionIndex];
   return (
     <div>
-      <div className="flex justify-between items-start w-full">
-        <h1>{quiz.topic}</h1>
+      <h1 className="text-3xl text-center mb-5  font-semibold">{quiz.topic}</h1>
+      <div className="flex justify-between items-end w-full mb-2">
+        <p className="text-sm text-muted-foreground">
+          Question {currentQuestionIndex + 1} of {quiz.questions.length}
+        </p>
         <p>
-          Time Left:{Math.floor(timeLeft / 60)}:
-          {String(timeLeft % 60).padStart(2, "0")}
+          Time Left:{" "}
+          <span className="px-3 py-1 rounded bg-primary text-white w-14 inline-flex items-center justify-center">
+            {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
+          </span>
         </p>
       </div>
       <Card>
         <CardHeader>
-          <h2>
-            Question {currentQuestionIndex + 1} of {quiz.questions.length}
-          </h2>
-          <CardTitle>{currentQuestion.question}</CardTitle>
+          <CardTitle className="text-2xl font-semibold">
+            {currentQuestion.question}
+          </CardTitle>
         </CardHeader>
         <CardFooter>
           <div className="grid grid-cols-2 w-full gap-2">
