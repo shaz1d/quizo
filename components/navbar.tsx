@@ -20,7 +20,7 @@ const Navbar = async () => {
     return redirect("/login");
   }
   return (
-    <header className="w-full flex justify-between items-center gap-5 max-w-xl sticky top-0">
+    <header className="w-full flex justify-between items-center gap-5 max-w-xl">
       <Link href="/" className="flex items-center gap-2 font-semibold">
         <Icons.newLogo className="size-8" /> Quizo
       </Link>

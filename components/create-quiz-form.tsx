@@ -25,8 +25,8 @@ const quizSchema = z.object({
     .array(
       z.object({
         title: z.string().min(1),
-        options: z.array(z.string().min(1).max(20)).min(3).max(3),
-        answer: z.string().min(1).max(20),
+        options: z.array(z.string().min(1)).min(3).max(3),
+        answer: z.string().min(1),
       })
     )
     .min(1),

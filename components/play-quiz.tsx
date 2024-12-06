@@ -22,7 +22,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
   const [selectedAnswers, setSelectedAnswers] = useState<
     Record<string, string>
   >({});
-  const [timeLeft, setTimeLeft] = useState(5);
+  const [timeLeft, setTimeLeft] = useState(120);
 
   const handleOptionSelect = (questionId: string, option: string) => {
     const updatedAnswers = {
@@ -34,14 +34,12 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
     if (currentQuestionIndex < quiz!.questions.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     } else {
-      handleSubmit(updatedAnswers); // Submit when the last question is answered
+      handleSubmit(updatedAnswers);
     }
   };
 
   const handleSubmit = useCallback(
     async (answers?: Record<string, string>) => {
-      console.log("Selected Answers:", selectedAnswers);
-      // Send `selectedAnswers` to your API for validation
       const userAnswers = answers || selectedAnswers;
       const res = await axios.post("/api/check", {
         quizId: quiz.id,
