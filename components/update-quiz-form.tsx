@@ -18,6 +18,18 @@ import { Plus, Trash } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Question } from "@prisma/client";
+
+type Props = {
+  initialData: {
+    questions: Question[];
+  } & {
+    id: string;
+    topic: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+};
 
 const quizSchema = z.object({
   title: z.string().min(1),
@@ -32,13 +44,15 @@ const quizSchema = z.object({
     .min(1),
 });
 
-export function CreateQuizForm() {
+export function UpdateQuizForm({ initialData }: Props) {
+  console.log(initialData);
+  const { topic, questions } = initialData;
   const router = useRouter();
   const form = useForm<z.infer<typeof quizSchema>>({
     resolver: zodResolver(quizSchema),
     defaultValues: {
-      title: "",
-      questions: [{ title: "", options: ["", "", ""], answer: "" }],
+      title: topic,
+      questions: questions,
     },
   });
   const { fields, append, remove } = useFieldArray({

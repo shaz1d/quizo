@@ -1,9 +1,9 @@
 import { auth } from "@/auth";
-import { DrawerQuiz } from "@/components/drawer";
 import Leaderboard from "@/components/leaderboard";
 import Navbar from "@/components/navbar";
 import QuizContent from "@/components/quiz-content";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 
 import {
   Card,
@@ -15,6 +15,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getQuizs, getUsers } from "@/lib/actions";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 import { redirect } from "next/navigation";
 
@@ -53,7 +54,11 @@ export default async function Home() {
                   <CardTitle>Quizes</CardTitle>
                   <CardDescription>{quizes.length} Quizes</CardDescription>
                 </div>
-                {isAdmin && <DrawerQuiz />}
+                {isAdmin && (
+                  <Link href="/quiz/new">
+                    <Button variant="outline">Create Quiz</Button>
+                  </Link>
+                )}
               </CardHeader>
 
               <CardContent className="space-y-2 px-0">

@@ -1,11 +1,8 @@
-import { Edit, MessageCircleQuestion, Play, Trash } from "lucide-react";
+import { Edit, MessageCircleQuestion, Play } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { auth } from "@/auth";
-import { DrawerQuiz } from "./drawer";
 
 type Props = {
   quizes: {
@@ -40,11 +37,18 @@ const QuizContent = ({ quizes }: Props) => {
                   </p>
                 </div>
               </div>
-              <Link href={`/play/${quiz.id}`}>
-                <Button>
-                  <Play /> Play
-                </Button>
-              </Link>
+              <div className="flex gap-1">
+                <Link href={`/play/${quiz.id}`}>
+                  <Button>
+                    <Play /> Play
+                  </Button>
+                </Link>
+                <Link href={`/quiz/${quiz.id}`}>
+                  <Button variant="outline" size="icon">
+                    <Edit />
+                  </Button>
+                </Link>
+              </div>
             </div>
           );
         })}
