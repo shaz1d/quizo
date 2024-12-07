@@ -23,6 +23,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
   const [selectedAnswers, setSelectedAnswers] = useState<
     Record<string, string>
   >({});
+  const [isLoading, setIsLoading] = useState(false);
   const [timeLeft, setTimeLeft] = useState(120);
   const router = useRouter();
 
@@ -31,6 +32,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
       ...selectedAnswers,
       [questionId]: option,
     };
+
     setSelectedAnswers(updatedAnswers);
     // Move to the next question
     if (currentQuestionIndex < quiz!.questions.length - 1) {
@@ -42,6 +44,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
 
   const handleSubmit = useCallback(
     async (answers?: Record<string, string>) => {
+      setIsLoading(true);
       const userAnswers = answers || selectedAnswers;
       const res = await axios.post("/api/check", {
         quizId: quiz.id,
@@ -99,6 +102,8 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
           <div className="grid grid-cols-2 w-full gap-2">
             {currentQuestion.options.map((option, index) => (
               <Button
+                className=" whitespace-normal py-2 h-auto text-left justify-start items-start"
+                disabled={isLoading}
                 key={index}
                 onClick={() => handleOptionSelect(currentQuestion.id, option)}
               >
