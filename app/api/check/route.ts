@@ -62,9 +62,16 @@ export async function POST(req: Request) {
           },
         },
       });
-      return NextResponse.json(game);
+      return NextResponse.json({
+        played: false,
+        data: game,
+      });
     } else {
-      return NextResponse.json(hasPlayed);
+      return NextResponse.json({
+        played: true,
+        data: hasPlayed,
+        newScore: userScore,
+      });
     }
   } catch (error) {
     console.log("[Answer Check POST]", error);

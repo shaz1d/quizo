@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Card, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type QuizProp = {
   quiz: {
@@ -23,6 +24,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
     Record<string, string>
   >({});
   const [timeLeft, setTimeLeft] = useState(120);
+  const router = useRouter();
 
   const handleOptionSelect = (questionId: string, option: string) => {
     const updatedAnswers = {
@@ -45,10 +47,16 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
         quizId: quiz.id,
         userAnswers,
       });
-
       console.log(res.data);
+      if (res.data.played) {
+        router.push(
+          `/results/${res.data.data[0].id}?newScore=${res.data.newScore}`
+        );
+      } else {
+        router.push(`/results/${res.data.data.id}`);
+      }
     },
-    [selectedAnswers, quiz.id]
+    [selectedAnswers, quiz.id, router]
   );
   // Timer logic
   useEffect(() => {
