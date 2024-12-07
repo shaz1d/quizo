@@ -1,8 +1,11 @@
-import { MessageCircleQuestion, Play } from "lucide-react";
+import { Edit, MessageCircleQuestion, Play, Trash } from "lucide-react";
 import React from "react";
 import { Button } from "./ui/button";
 import { ScrollArea } from "./ui/scroll-area";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { auth } from "@/auth";
+import { DrawerQuiz } from "./drawer";
 
 type Props = {
   quizes: {

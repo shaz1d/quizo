@@ -2,6 +2,7 @@
 import { z } from "zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -49,10 +50,16 @@ export function CreateQuizForm() {
 
   async function onSubmit(values: z.infer<typeof quizSchema>) {
     const res = await axios.post("/api/quiz", values);
-    console.log(res.data);
+
     form.reset();
+
     close();
     router.refresh();
+    if (res.data.success) {
+      toast.success("Quiz has been created.");
+    } else {
+      toast.error("Failed to create quiz.");
+    }
   }
 
   return (
@@ -160,7 +167,7 @@ export function CreateQuizForm() {
             ))}
           </div>
         </ScrollArea>
-        <div className="w-full flex justify-between items-center gap-5 mt-2">
+        <div className="w-full flex justify-between items-center gap-5 mt-2 mb-6">
           <Button type="button" variant="secondary" onClick={() => close()}>
             Cancel
           </Button>

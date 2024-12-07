@@ -4,6 +4,7 @@ import Leaderboard from "@/components/leaderboard";
 import Navbar from "@/components/navbar";
 import QuizContent from "@/components/quiz-content";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import {
   Card,
   CardContent,
@@ -33,8 +34,8 @@ export default async function Home() {
     <>
       {" "}
       <Navbar />
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Tabs defaultValue="quizes" className="w-[450px]">
+      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start w-full max-w-xl">
+        <Tabs defaultValue="quizes" className="w-full">
           <TabsList
             className={cn(
               "w-full grid",
