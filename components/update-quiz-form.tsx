@@ -36,7 +36,7 @@ const quizSchema = z.object({
   questions: z
     .array(
       z.object({
-        title: z.string().min(1),
+        question: z.string().min(1),
         options: z.array(z.string().min(1)).min(3).max(3),
         answer: z.string().min(1),
       })
@@ -45,7 +45,6 @@ const quizSchema = z.object({
 });
 
 export function UpdateQuizForm({ initialData }: Props) {
-  console.log(initialData);
   const { topic, questions } = initialData;
   const router = useRouter();
   const form = useForm<z.infer<typeof quizSchema>>({
@@ -61,16 +60,16 @@ export function UpdateQuizForm({ initialData }: Props) {
   });
 
   async function onSubmit(values: z.infer<typeof quizSchema>) {
-    const res = await axios.post("/api/quiz", values);
+    const res = await axios.patch(`/api/quiz/${initialData.id}`, values);
 
     form.reset();
 
     close();
-    router.refresh();
+    router.push("/");
     if (res.data.success) {
-      toast.success("Quiz has been created.");
+      toast.success("Quiz has been updated.");
     } else {
-      toast.error("Failed to create quiz.");
+      toast.error("Failed to update quiz.");
     }
   }
 
@@ -107,7 +106,7 @@ export function UpdateQuizForm({ initialData }: Props) {
           className="w-full mb-4"
           onClick={() =>
             append({
-              title: "",
+              question: "",
               options: ["", "", ""],
               answer: "",
             })
@@ -132,7 +131,7 @@ export function UpdateQuizForm({ initialData }: Props) {
 
               <FormField
                 control={form.control}
-                name={`questions.${index}.title`}
+                name={`questions.${index}.question`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Question Title</FormLabel>
@@ -184,7 +183,7 @@ export function UpdateQuizForm({ initialData }: Props) {
               Cancel
             </Button>
           </Link>
-          <Button type="submit">Create Quiz</Button>
+          <Button type="submit">Update Quiz</Button>
         </div>
       </form>
     </Form>

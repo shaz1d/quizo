@@ -52,6 +52,7 @@ export function CreateQuizForm() {
     form.reset();
 
     close();
+    router.push("/");
     router.refresh();
     if (res.data.success) {
       toast.success("Quiz has been created.");

@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="w-full flex flex-col items-center max-w-3xl mx-auto min-h-screen p-4 pb-20 gap-10 sm:p-8 font-[family-name:var(--font-geist-sans)]">
+        <div className="w-full flex flex-col items-center max-w-3xl mx-auto min-h-screen p-4 pb-20 gap-5 font-[family-name:var(--font-geist-sans)]">
           <Toaster position="top-center" richColors />
           {children}
           <footer className=" flex gap-6 flex-wrap items-center justify-center"></footer>
