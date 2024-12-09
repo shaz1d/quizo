@@ -11,7 +11,7 @@ type Props = {
     resultId: string;
     newScore?: string;
   };
-  searchParams: { newScore: string };
+  searchParams: { newScore: string; timeTaken: string };
 };
 
 const ResultPage = async ({ params, searchParams }: Props) => {
@@ -19,7 +19,7 @@ const ResultPage = async ({ params, searchParams }: Props) => {
   if (!session?.user) {
     return redirect("/login");
   }
-  const newScore = searchParams.newScore;
+  const { newScore, timeTaken } = searchParams;
   const result = await db.playedQuiz.findUnique({
     where: { id: params.resultId },
   });
@@ -37,23 +37,32 @@ const ResultPage = async ({ params, searchParams }: Props) => {
       </h1>
       {newScore && (
         <div className="text-center">
-          <p className="text-lg font-medium">Your new Score</p>
-          <p className="text-4xl font-semibold">{newScore}</p>
+          <div className="grid grid-cols-2 gap-3 mt-3">
+            <div className="border p-4 rounded-lg">
+              <p className="text-lg font-medium">Your new Score</p>
+              <p className="text-4xl font-semibold">{newScore}</p>
+            </div>
+            <div className="border p-4 rounded-lg">
+              <p className="text-lg font-medium">Time Taken</p>
+              <p className="text-4xl font-semibold">{timeTaken}</p>
+            </div>
+          </div>
+
           <p className="text-muted-foreground text-xs">
             This score will not be added to your overall score
           </p>
         </div>
       )}
       <div className="text-center w-full">
-        <p>Here are your results</p>
+        <p>{newScore ? "Your Previous Result" : "Here are your results"}</p>
         <div className="grid grid-cols-2 gap-3 mt-3">
           <div className="border p-4 rounded-lg">
             <p className="text-sm font-medium">Score</p>
-            <p>556</p>
+            <p className="text-2xl font-semibold">{result.score}</p>
           </div>
           <div className="border p-4 rounded-lg">
             <p className="text-sm font-medium">Time Taken</p>
-            <p>65</p>
+            <p className="text-2xl font-semibold">{result.timeTaken}</p>
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
     Record<string, string>
   >({});
   const [isLoading, setIsLoading] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(120);
+  const [timeLeft, setTimeLeft] = useState(quiz.questions.length * 10);
   const router = useRouter();
 
   const handleOptionSelect = (questionId: string, option: string) => {
@@ -49,17 +49,18 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
       const res = await axios.post("/api/check", {
         quizId: quiz.id,
         userAnswers,
+        timeTaken: quiz.questions.length * 10 - timeLeft,
       });
-      console.log(res.data);
+
       if (res.data.played) {
         router.push(
-          `/results/${res.data.data[0].id}?newScore=${res.data.newScore}`
+          `/results/${res.data.data[0].id}?newScore=${res.data.newScore}&timeTaken=${res.data.timeTaken}`
         );
       } else {
         router.push(`/results/${res.data.data.id}`);
       }
     },
-    [selectedAnswers, quiz.id, router]
+    [selectedAnswers, quiz.id, router, timeLeft, quiz.questions.length]
   );
   // Timer logic
   useEffect(() => {
