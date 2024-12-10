@@ -28,10 +28,22 @@ export async function POST(req: Request) {
         },
       },
     });
-    quiz?.questions.forEach((question) => {
-      if (userAnswers[question.id] === question.answer) {
+    if (!quiz) {
+      return new NextResponse("Quiz not found", { status: 404 });
+    }
+    // Create an array of questions with user answers
+    const questionsWithAnswers = quiz.questions.map((question) => {
+      const isCorrect = userAnswers[question.id] === question.answer;
+      if (isCorrect) {
         userScore += BASE_POINTS;
       }
+
+      return {
+        id: question.id,
+        correctAnswer: question.answer,
+        userAnswer: userAnswers[question.id] || null,
+        isCorrect,
+      };
     });
 
     // Apply time penalty
@@ -59,6 +71,7 @@ export async function POST(req: Request) {
           userId: user.id,
           score: userScore,
           timeTaken,
+          result: questionsWithAnswers,
         },
       });
       await db.user.update({
