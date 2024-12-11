@@ -10,10 +10,11 @@ type QuestionProps = {
 export async function POST(req: Request) {
   const { title, questions } = await req.json();
   const session = await auth();
-  if (!session) {
+  const isAdmin = session?.user.isAdmin;
+  if (!isAdmin) {
     return NextResponse.json({
       success: false,
-      error: "You must be signed in to create a quiz",
+      error: "You must be an admin to create a quiz",
     });
   }
   try {

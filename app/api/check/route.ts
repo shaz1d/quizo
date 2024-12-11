@@ -4,11 +4,15 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { quizId, userAnswers } = await req.json();
+    const { quizId, userAnswers, timeTaken } = await req.json();
     const session = await auth();
     if (!session?.user) {
       return new NextResponse("Unauthenticated", { status: 401 });
     }
+
+    // Constants for scoring
+    const BASE_POINTS = 10; // Points for each correct answer
+    const TIME_PENALTY_RATE = 0.2; // Points deducted per second
 
     let userScore = 0;
     const quiz = await db.quiz.findUnique({
@@ -24,11 +28,27 @@ export async function POST(req: Request) {
         },
       },
     });
-    quiz?.questions.map((question) => {
-      if (userAnswers[question.id] === question.answer) {
-        userScore++;
+    if (!quiz) {
+      return new NextResponse("Quiz not found", { status: 404 });
+    }
+    // Create an array of questions with user answers
+    const questionsWithAnswers = quiz.questions.map((question) => {
+      const isCorrect = userAnswers[question.id] === question.answer;
+      if (isCorrect) {
+        userScore += BASE_POINTS;
       }
+
+      return {
+        id: question.id,
+        correctAnswer: question.answer,
+        userAnswer: userAnswers[question.id] || null,
+        isCorrect,
+      };
     });
+
+    // Apply time penalty
+    const timePenalty = timeTaken * TIME_PENALTY_RATE;
+    userScore = Math.max(userScore - timePenalty, 0); // Ensure score doesn't go below 0
 
     const user = await db.user.findUnique({
       where: {
@@ -42,14 +62,16 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const hasPlayed = user?.hasPlayed.filter((game) => game.quizId === quizId);
-    console.log(userScore);
+    const hasPlayed = user.hasPlayed.filter((game) => game.quizId === quizId);
+
     if (hasPlayed?.length === 0) {
       const game = await db.playedQuiz.create({
         data: {
           quizId,
           userId: user.id,
           score: userScore,
+          timeTaken,
+          result: questionsWithAnswers,
         },
       });
       await db.user.update({
@@ -71,6 +93,7 @@ export async function POST(req: Request) {
         played: true,
         data: hasPlayed,
         newScore: userScore,
+        timeTaken,
       });
     }
   } catch (error) {

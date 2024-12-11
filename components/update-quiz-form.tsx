@@ -18,13 +18,25 @@ import { Plus, Trash } from "lucide-react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Question } from "@prisma/client";
+
+type Props = {
+  initialData: {
+    questions: Question[];
+  } & {
+    id: string;
+    topic: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+};
 
 const quizSchema = z.object({
   title: z.string().min(1),
   questions: z
     .array(
       z.object({
-        title: z.string().min(1),
+        question: z.string().min(1),
         options: z.array(z.string().min(1)).min(3).max(3),
         answer: z.string().min(1),
       })
@@ -32,13 +44,14 @@ const quizSchema = z.object({
     .min(1),
 });
 
-export function CreateQuizForm() {
+export function UpdateQuizForm({ initialData }: Props) {
+  const { topic, questions } = initialData;
   const router = useRouter();
   const form = useForm<z.infer<typeof quizSchema>>({
     resolver: zodResolver(quizSchema),
     defaultValues: {
-      title: "",
-      questions: [{ title: "", options: ["", "", ""], answer: "" }],
+      title: topic,
+      questions: questions,
     },
   });
   const { fields, append, remove } = useFieldArray({
@@ -47,17 +60,16 @@ export function CreateQuizForm() {
   });
 
   async function onSubmit(values: z.infer<typeof quizSchema>) {
-    const res = await axios.post("/api/quiz", values);
+    const res = await axios.patch(`/api/quiz/${initialData.id}`, values);
 
     form.reset();
 
     close();
     router.push("/");
-    router.refresh();
     if (res.data.success) {
-      toast.success("Quiz has been created.");
+      toast.success("Quiz has been updated.");
     } else {
-      toast.error("Failed to create quiz.");
+      toast.error("Failed to update quiz.");
     }
   }
 
@@ -94,7 +106,7 @@ export function CreateQuizForm() {
           className="w-full mb-4"
           onClick={() =>
             append({
-              title: "",
+              question: "",
               options: ["", "", ""],
               answer: "",
             })
@@ -119,7 +131,7 @@ export function CreateQuizForm() {
 
               <FormField
                 control={form.control}
-                name={`questions.${index}.title`}
+                name={`questions.${index}.question`}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Question Title</FormLabel>
@@ -171,7 +183,7 @@ export function CreateQuizForm() {
               Cancel
             </Button>
           </Link>
-          <Button type="submit">Create Quiz</Button>
+          <Button type="submit">Update Quiz</Button>
         </div>
       </form>
     </Form>
