@@ -111,12 +111,6 @@ export async function DELETE(
       });
     }
 
-    // Delete all associated questions
-    await db.question.deleteMany({
-      where: { quizId },
-    });
-
-    // Delete the quiz itself
     const quiz = await db.quiz.delete({
       where: { id: quizId },
     });
