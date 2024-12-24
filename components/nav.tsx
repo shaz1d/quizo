@@ -17,6 +17,16 @@ const Nav = () => {
       >
         Play Quiz
       </Link>
+      
+      <Link
+        href="/leaderboard"
+        className={cn(
+          "transition-colors hover:text-foreground/80",
+          pathname === "/leaderboard" ? "text-foreground" : "text-foreground/80"
+        )}
+      >
+        Leaderboard
+      </Link>
       <Link
         href="/contact"
         className={cn(

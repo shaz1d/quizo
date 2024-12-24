@@ -18,8 +18,8 @@ const UserContent = async () => {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar>
-              <AvatarImage src="" />
-              <AvatarFallback>A</AvatarFallback>
+              <AvatarImage src={session.user.image as string} />
+              <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>

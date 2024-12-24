@@ -5,7 +5,7 @@ import UserContent from "../user-content";
 
 const Header = () => {
   return (
-    <header className="flex container mx-auto justify-between items-center h-14">
+    <header className="flex container mx-auto justify-between items-center h-20">
       <Link href="/" className="flex items-center gap-2 font-medium">
         <Icons.newLogo className="size-8" /> Quizo
       </Link>

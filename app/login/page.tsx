@@ -19,7 +19,7 @@ const page = async () => {
     return redirect("/");
   }
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-[400px] flex items-center justify-center">
       <Card className="max-w-xl">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl flex items-center justify-center gap-2 mb-6">
