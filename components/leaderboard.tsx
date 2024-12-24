@@ -6,7 +6,7 @@ import { ScrollArea } from "./ui/scroll-area";
 const Leaderboard = async () => {
   const topPlayers = await getTopPlayers();
   return (
-    <ScrollArea className="px-8 h-72">
+    <ScrollArea className="px-8 h-[400px]">
       <div className="flex flex-col gap-3">
         {topPlayers.map((player, index) => {
           if (index === 0) {

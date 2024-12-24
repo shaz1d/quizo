@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import Navbar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { cn, formatTime } from "@/lib/utils";
@@ -40,7 +39,6 @@ const ResultPage = async ({ params, searchParams }: Props) => {
 
   return (
     <div className="flex flex-col items-center gap-6 w-full max-w-xl mx-auto">
-      <Navbar></Navbar>
       <h1 className="text-2xl font-semibold">
         {newScore
           ? "You have already played this quiz"
