@@ -1,4 +1,3 @@
-import Navbar from "@/components/navbar";
 import PlayQuiz from "@/components/play-quiz";
 import { db } from "@/lib/db";
 
@@ -29,7 +28,6 @@ const page = async ({ params: { quizId } }: Props) => {
 
   return (
     <>
-      <Navbar />
       <div className="w-full max-w-lg mx-auto">
         <PlayQuiz quiz={quiz} />
       </div>
