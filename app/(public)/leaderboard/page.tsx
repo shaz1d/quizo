@@ -3,7 +3,7 @@ import Leaderboard from "@/components/leaderboard";
 const page = () => {
   return (
     <>
-      <section className="bg-[#FBF9F9] rounded-[32px] container mx-auto py-20  px-8 text-center">
+      <section className="bg-slate-200 rounded-[32px] container mx-auto py-20  px-8 text-center">
         <h1 className="text-6xl max-w-[620px] leading-[120%] mx-auto font-medium">
           Top Learners Worldwide
         </h1>

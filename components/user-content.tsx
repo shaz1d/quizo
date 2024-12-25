@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 const UserContent = async () => {
   const session = await auth();
@@ -50,7 +51,9 @@ const UserContent = async () => {
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Link href="/login">Login</Link>
+        <Link href="/login">
+          <Button>Log in</Button>
+        </Link>
       )}
     </>
   );

@@ -42,7 +42,7 @@ export function ContactForm() {
   }
 
   return (
-    <div className="w-full max-w-2xl p-8 rounded-2xl bg-[#FBF9F9]">
+    <div className="w-full max-w-2xl p-8 rounded-2xl bg-slate-200">
       <h2 className="text-5xl font-medium leading-[120%]">Get In Touch</h2>
       <p className="text-muted-foreground mb-10">You can reach us anytime</p>
       <Form {...form}>
@@ -56,7 +56,11 @@ export function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input className="h-12" placeholder="Your Name" {...field} />
+                  <Input
+                    className="h-12 bg-white"
+                    placeholder="Your Name"
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />
@@ -69,7 +73,11 @@ export function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input className="h-12" placeholder="Your Email" {...field} />
+                  <Input
+                    className="h-12 bg-white"
+                    placeholder="Your Email"
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />
@@ -84,7 +92,7 @@ export function ContactForm() {
                 <FormControl>
                   <Textarea
                     placeholder="Your Message"
-                    className="resize-none h-52"
+                    className="resize-none h-52 bg-white"
                     {...field}
                   />
                 </FormControl>

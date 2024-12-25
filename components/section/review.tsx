@@ -10,7 +10,7 @@ const Review = () => {
 
       <div className="w-full overflow-hidden flex">
         <div className="grid grid-cols-4 gap-5">
-          <div className="p-8 rounded-3xl bg-[#FBF9F9]">
+          <div className="p-8 rounded-3xl bg-slate-200">
             <p className="text-xl font-medium mb-10">
               The quizzes are so much fun and cover a wide range of topics. I’ve
               learned more in a week here than I did in a month elsewhere!
@@ -31,7 +31,7 @@ const Review = () => {
               <Icons.quote className="size-10" />
             </div>
           </div>
-          <div className="p-8 rounded-3xl bg-[#FBF9F9]">
+          <div className="p-8 rounded-3xl bg-slate-200">
             <p className="text-xl font-medium mb-10">
               The quizzes are so much fun and cover a wide range of topics. I’ve
               learned more in a week here than I did in a month elsewhere!
@@ -52,7 +52,7 @@ const Review = () => {
               <Icons.quote className="size-10" />
             </div>
           </div>
-          <div className="p-8 rounded-3xl bg-[#FBF9F9]">
+          <div className="p-8 rounded-3xl bg-slate-200">
             <p className="text-xl font-medium mb-10">
               The quizzes are so much fun and cover a wide range of topics. I’ve
               learned more in a week here than I did in a month elsewhere!
@@ -73,7 +73,7 @@ const Review = () => {
               <Icons.quote className="size-10" />
             </div>
           </div>
-          <div className="p-8 rounded-3xl bg-[#FBF9F9]">
+          <div className="p-8 rounded-3xl bg-slate-200">
             <p className="text-xl font-medium mb-10">
               The quizzes are so much fun and cover a wide range of topics. I’ve
               learned more in a week here than I did in a month elsewhere!
