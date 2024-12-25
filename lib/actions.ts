@@ -19,6 +19,15 @@ export const getQuizs = async () => {
     throw new Error("Failed to fetch quizs");
   }
 };
+export const getQuestions = async () => {
+  try {
+    const questions = await db.question.findMany();
+    return questions;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to fetch Questions");
+  }
+};
 
 export const getUsers = async () => {
   try {
@@ -26,6 +35,7 @@ export const getUsers = async () => {
     return users;
   } catch (error) {
     console.log(error, "Failed to fetch users");
+    throw new Error("Failed to fetch Users");
   }
 };
 export const getUserById = async (email: string) => {

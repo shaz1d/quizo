@@ -26,7 +26,7 @@ export default async function Layout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>{children}</main>
+      <main className="p-5 w-full">{children}</main>
     </SidebarProvider>
   );
 }

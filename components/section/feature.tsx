@@ -1,7 +1,7 @@
 const Feature = () => {
   return (
     <section className="w-full py-16">
-      <div className="grid grid-cols-2 md:gap-20">
+      <div className="grid grid-cols-2 md:gap-20 container mx-auto">
         <div>
           <h2 className="text-4xl font-medium mb-6">
             Discover the Easiest Way <br />

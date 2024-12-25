@@ -80,13 +80,12 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
 
   const currentQuestion = quiz.questions[currentQuestionIndex];
   return (
-    <div>
-      <h1 className="text-3xl text-center mb-5  font-semibold">{quiz.topic}</h1>
+    <section className="w-full py-12 container mx-auto max-w-lg">
       <div className="flex justify-between items-end w-full mb-2">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-base text-muted-foreground">
           Question {currentQuestionIndex + 1} of {quiz.questions.length}
         </p>
-        <p>
+        <p className="font-medium">
           Time Left:{" "}
           <span className="px-3 py-1 rounded bg-primary text-white w-14 inline-flex items-center justify-center">
             {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, "0")}
@@ -95,7 +94,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
       </div>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl font-semibold">
+          <CardTitle className="text-3xl font-semibold capitalize">
             {currentQuestion.question}
           </CardTitle>
         </CardHeader>
@@ -103,7 +102,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
           <div className="grid grid-cols-2 w-full gap-2">
             {currentQuestion.options.map((option, index) => (
               <Button
-                className=" whitespace-normal py-2 h-auto text-left justify-start items-start"
+                className=" whitespace-normal py-2 h-auto text-lg text-left justify-start  items-start"
                 disabled={isLoading}
                 key={index}
                 onClick={() => handleOptionSelect(currentQuestion.id, option)}
@@ -114,7 +113,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
           </div>
         </CardFooter>
       </Card>
-    </div>
+    </section>
   );
 };
 

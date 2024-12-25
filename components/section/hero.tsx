@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 const Hero = () => {
   return (
-    <section className="bg-[#FBF9F9] rounded-[32px]  w-full py-20  px-8 text-center">
+    <section className="bg-[#FBF9F9] rounded-[32px] container mx-auto py-20  px-8 text-center">
       <h1 className="text-6xl max-w-[620px] leading-[120%] mx-auto font-medium">
         Challenge Your Mind, Master Any Topic!
       </h1>

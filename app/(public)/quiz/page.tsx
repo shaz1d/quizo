@@ -1,18 +1,9 @@
 import { auth } from "@/auth";
-import Leaderboard from "@/components/leaderboard";
-import QuizContent from "@/components/quiz-content";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getQuizs, getUsers } from "@/lib/actions";
-import { cn } from "@/lib/utils";
+
+import { getQuizs } from "@/lib/actions";
+
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -22,91 +13,44 @@ const page = async () => {
   if (!session?.user) {
     return redirect("/login");
   }
-  const isAdmin = session.user.isAdmin;
-
   const quizes = await getQuizs();
 
-  const users = await getUsers();
   return (
-    <div className="max-w-lg mx-auto">
-      <Tabs defaultValue="quizes" className="w-full">
-        <TabsList
-          className={cn("w-full grid", isAdmin ? "grid-cols-3" : "grid-cols-2")}
-        >
-          <TabsTrigger value="quizes">Quizes</TabsTrigger>
-          <TabsTrigger value="leaderboard">Leaderboard</TabsTrigger>
-          {isAdmin && <TabsTrigger value="users">Users</TabsTrigger>}
-        </TabsList>
-        <TabsContent value="quizes">
-          <Card>
-            <CardHeader className="flex-row justify-between items-start space-y-0">
-              <div className="space-y-1.5">
-                <CardTitle>Quizes</CardTitle>
-                <CardDescription>{quizes.length} Quizes</CardDescription>
-              </div>
-              {isAdmin && (
-                <Link href="/quiz/new">
-                  <Button variant="outline">Create Quiz</Button>
+    <>
+      <section className="bg-[#FBF9F9] rounded-[32px] container mx-auto py-20  px-8 text-center">
+        <h1 className="text-6xl max-w-[620px] leading-[120%] mx-auto font-medium">
+          Explore Topics That Excite You!
+        </h1>
+        <p className="pt-2 pb-4 max-w-3xl mx-auto">
+          Choose from a variety of categories to test your knowledge, learn new
+          things, and have fun.
+        </p>
+      </section>
+      <section className="container mx-auto py-20">
+        <div className="grid grid-cols-4 gap-6">
+          {quizes.map((quiz) => {
+            return (
+              <div
+                key={quiz.id}
+                className="p-8 border border-muted rounded-2xl"
+              >
+                <h4 className="text-2xl font-medium capitalize ">
+                  {quiz.topic}
+                </h4>
+                <p className="text-muted-foreground mb-10 text-sm">
+                  Contains {quiz.questions.length} questions
+                </p>
+                <Link href={`/play/${quiz.id}`}>
+                  <Button size="lg" className="w-full">
+                    Start Quiz
+                  </Button>
                 </Link>
-              )}
-            </CardHeader>
-
-            <CardContent className="space-y-2 px-0">
-              <QuizContent quizes={quizes} />
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="leaderboard">
-          <Card>
-            <CardHeader>
-              <CardTitle>Leaderboard</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2 px-0">
-              <Leaderboard />
-            </CardContent>
-          </Card>
-        </TabsContent>
-        {isAdmin && (
-          <TabsContent value="users">
-            <Card>
-              <CardHeader>
-                <CardTitle>Users</CardTitle>
-                <CardDescription>Users List</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2 flex flex-col gap-1">
-                {users &&
-                  users.map((user) => {
-                    return (
-                      <div
-                        key={user.id}
-                        className="flex items-center justify-between space-x-4"
-                      >
-                        <div className="flex items-center space-x-4">
-                          <Avatar>
-                            <AvatarImage src={user.image as string} />
-                            <AvatarFallback>
-                              {user.name?.charAt(0)}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <p className="text-sm font-medium leading-none">
-                              {user.name}
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                              {user.email}
-                            </p>
-                          </div>
-                        </div>
-                        <p>{user.isAdmin ? "admin" : "user"}</p>
-                      </div>
-                    );
-                  })}
-              </CardContent>
-            </Card>
-          </TabsContent>
-        )}
-      </Tabs>
-    </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    </>
   );
 };
 

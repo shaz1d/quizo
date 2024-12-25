@@ -28,9 +28,13 @@ const page = async ({ params: { quizId } }: Props) => {
 
   return (
     <>
-      <div className="w-full max-w-lg mx-auto">
-        <PlayQuiz quiz={quiz} />
-      </div>
+      <section className="bg-[#FBF9F9] rounded-[32px] container mx-auto py-10   px-8 text-center">
+        <p className=" max-w-3xl mx-auto">Topic</p>
+        <h1 className="text-6xl max-w-[620px] leading-[120%] capitalize mx-auto font-medium">
+          {quiz.topic}
+        </h1>
+      </section>
+      <PlayQuiz quiz={quiz} />
     </>
   );
 };
