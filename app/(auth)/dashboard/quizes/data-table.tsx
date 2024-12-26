@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { toast } from "sonner";
 import { AlertModal } from "@/components/alert-modal";
+import { Quiz } from "./columns";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -56,7 +57,7 @@ export function DataTable<TData, TValue>({
     if (column.id === "actions") {
       column.cell = ({ row }) => (
         <div className="flex justify-end gap-2">
-          <Link href={`/dashboard/quizes/${row.original.id}`}>
+          <Link href={`/dashboard/quizes/${(row.original as Quiz).id}`}>
             <Button variant="outline">
               <Edit />
               Edit
@@ -65,7 +66,7 @@ export function DataTable<TData, TValue>({
           <Button
             variant="destructive"
             onClick={() => {
-              setCurrentQuizId(row.original.id);
+              setCurrentQuizId((row.original as Quiz).id);
               setIsDeleteModalOpen(true);
             }}
           >

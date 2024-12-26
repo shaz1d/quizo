@@ -1,8 +1,7 @@
 "use client";
-import { Edit, MessageCircleQuestion, Play, Trash } from "lucide-react";
+import { Edit, MessageCircleQuestion, Trash } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { ScrollArea } from "./ui/scroll-area";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AlertModal } from "./alert-modal";

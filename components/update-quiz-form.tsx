@@ -65,7 +65,7 @@ export function UpdateQuizForm({ initialData }: Props) {
     form.reset();
 
     close();
-    router.push("/");
+    router.push("/dashboard/quizes");
     if (res.data.success) {
       toast.success("Quiz has been updated.");
     } else {

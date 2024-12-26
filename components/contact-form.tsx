@@ -1,8 +1,6 @@
 "use client";
 import { z } from "zod";
-import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -10,15 +8,12 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Plus, Trash } from "lucide-react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Textarea } from "./ui/textarea";
+import { useForm } from "react-hook-form";
 
 const quizSchema = z.object({
   name: z.string().min(1),
@@ -38,7 +33,9 @@ export function ContactForm() {
   });
 
   async function onSubmit(values: z.infer<typeof quizSchema>) {
+    console.log(values);
     form.reset();
+    router.refresh();
   }
 
   return (

@@ -1,6 +1,4 @@
-import Link from "next/link";
-import { Button } from "../ui/button";
-import { Star, StarIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 
 const Feature = () => {
   return (
