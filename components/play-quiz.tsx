@@ -24,7 +24,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
     Record<string, string>
   >({});
   const [isLoading, setIsLoading] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(quiz.questions.length * 10);
+  const [timeLeft, setTimeLeft] = useState(quiz.questions.length * 30);
   const router = useRouter();
 
   const handleOptionSelect = (questionId: string, option: string) => {
