@@ -56,7 +56,7 @@ export function DataTable<TData, TValue>({
     if (column.id === "actions") {
       column.cell = ({ row }) => (
         <div className="flex justify-end gap-2">
-          <Link href={`/dashboard/quizes/${(row.original as any).id}`}>
+          <Link href={`/dashboard/quizes/${row.original.id}`}>
             <Button variant="outline">
               <Edit />
               Edit
@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
           <Button
             variant="destructive"
             onClick={() => {
-              setCurrentQuizId((row.original as any).id);
+              setCurrentQuizId(row.original.id);
               setIsDeleteModalOpen(true);
             }}
           >

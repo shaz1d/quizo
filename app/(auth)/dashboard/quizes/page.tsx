@@ -4,8 +4,6 @@ import { DataTable } from "./data-table";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import QuizContent from "@/components/quiz-content";
-import { Card, CardHeader } from "@/components/ui/card";
 
 const page = async () => {
   const data = await getQuizs();

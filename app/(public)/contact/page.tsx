@@ -16,6 +16,24 @@ const page = () => {
             @shazid.dev@gmail.com
           </Link>
           <Link href="tel:+8801882696017">+88 (018)8269-6017</Link>
+          <div className="flex gap-6 w-full mt-20 text-sm">
+            <div className="max-w-[250px]">
+              <p className="font-semibold text-base mb-1">
+                Feedback and Suggestions
+              </p>
+              <p>
+                We value your feedback and are continuously working to imporve
+                Quizo.
+              </p>
+            </div>
+            <div className="max-w-[250px]">
+              <p className="font-semibold text-base mb-1">Media Inquires</p>
+              <p>
+                For media related questions or inquiries, please contact us at
+                shazid.dev@gmail.com.
+              </p>
+            </div>
+          </div>
         </div>
         <div className="flex flex-col items-end">
           <ContactForm />
