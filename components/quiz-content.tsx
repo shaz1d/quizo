@@ -48,55 +48,49 @@ const QuizContent = ({ quizes }: Props) => {
         onConfirm={() => handleDelete(currentQuizId)}
         open={isDeleteModalOpen}
       />
-      <ScrollArea className="px-6  h-64">
-        <div className="flex flex-col gap-5">
-          {quizes.map((quiz) => {
-            return (
-              <div
-                key={quiz.id}
-                className="flex items-start justify-between gap-4 space-x-4 rounded-md"
-              >
-                <div className="flex gap-2">
-                  <MessageCircleQuestion className="size-6" />
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium leading-none">
-                      {quiz.topic}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      Contains {quiz.questions.length} questions
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-1">
-                  <Link href={`/play/${quiz.id}`}>
-                    <Button>
-                      <Play /> Play
-                    </Button>
-                  </Link>
-                  <Link href={`/quiz/${quiz.id}`}>
-                    <Button variant="outline">
-                      <Edit />
-                      Edit
-                    </Button>
-                  </Link>
-                  <>
-                    <Button
-                      variant="destructive"
-                      onClick={() => {
-                        setCurrentQuizId(quiz.id);
-                        setIsDeleteModalOpen(true);
-                      }}
-                    >
-                      <Trash />
-                      Delete
-                    </Button>
-                  </>
+
+      <div className="flex flex-col gap-5">
+        {quizes.map((quiz) => {
+          return (
+            <div
+              key={quiz.id}
+              className="flex items-start justify-between gap-4 space-x-4 rounded-md"
+            >
+              <div className="flex gap-2">
+                <MessageCircleQuestion className="size-6" />
+                <div className="space-y-1">
+                  <p className="text-sm font-medium leading-none">
+                    {quiz.topic}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Contains {quiz.questions.length} questions
+                  </p>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      </ScrollArea>
+              <div className="flex gap-1">
+                <Link href={`/dashboard/quizes/${quiz.id}`}>
+                  <Button variant="outline">
+                    <Edit />
+                    Edit
+                  </Button>
+                </Link>
+                <>
+                  <Button
+                    variant="destructive"
+                    onClick={() => {
+                      setCurrentQuizId(quiz.id);
+                      setIsDeleteModalOpen(true);
+                    }}
+                  >
+                    <Trash />
+                    Delete
+                  </Button>
+                </>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };

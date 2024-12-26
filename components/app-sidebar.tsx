@@ -22,13 +22,13 @@ import { redirect } from "next/navigation";
 // Menu items.
 const items = [
   {
-    title: "Quizes",
-    url: "/dashboard/quizes",
+    title: "Dashboard",
+    url: "/dashboard",
     icon: Home,
   },
   {
-    title: "Questions",
-    url: "/dashboard/questions",
+    title: "Quizes",
+    url: "/dashboard/quizes",
     icon: Inbox,
   },
   {

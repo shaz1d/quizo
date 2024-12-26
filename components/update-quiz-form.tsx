@@ -75,7 +75,7 @@ export function UpdateQuizForm({ initialData }: Props) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-xl">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full ">
         <FormField
           control={form.control}
           name="title"
@@ -100,20 +100,7 @@ export function UpdateQuizForm({ initialData }: Props) {
             </span>
           </div>
         </div>
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full mb-4"
-          onClick={() =>
-            append({
-              question: "",
-              options: ["", "", ""],
-              answer: "",
-            })
-          }
-        >
-          <Plus className="size-5" /> Add Question
-        </Button>
+
         <div>
           {fields.map((field, index) => (
             <div className="mb-4" key={field.id}>
@@ -176,9 +163,22 @@ export function UpdateQuizForm({ initialData }: Props) {
             </div>
           ))}
         </div>
-
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full mb-4"
+          onClick={() =>
+            append({
+              question: "",
+              options: ["", "", ""],
+              answer: "",
+            })
+          }
+        >
+          <Plus className="size-5" /> Add Question
+        </Button>
         <div className="w-full flex justify-between items-center gap-5 mt-2 mb-6">
-          <Link href="/">
+          <Link href="/dashboard/quizes">
             <Button type="button" variant="secondary">
               Cancel
             </Button>
