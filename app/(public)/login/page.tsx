@@ -23,7 +23,7 @@ const page = async () => {
       <Card className="max-w-xl">
         <CardHeader className="space-y-1 text-center">
           <CardTitle className="text-2xl flex items-center justify-center gap-2 mb-6">
-            <Icons.logo className=" size-5" /> Quizo
+            <Icons.newLogo className=" size-5" /> Quizo
           </CardTitle>
           <CardTitle className="text-lg">Sign In</CardTitle>
           <CardDescription>
