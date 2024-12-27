@@ -11,31 +11,58 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "sonner";
+import { useState } from "react";
 
-const quizSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().min(1),
-  message: z.string().min(1),
+const contactSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "Name is required" })
+    .max(100, { message: "Name should not exceed 100 characters" }),
+
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email({ message: "Invalid email address" }),
+
+  message: z
+    .string()
+    .min(10, { message: "Message should be at least 10 characters long" })
+    .max(1000, { message: "Message should not exceed 1000 characters" }),
 });
 
 export function ContactForm() {
-  const router = useRouter();
-  const form = useForm<z.infer<typeof quizSchema>>({
-    resolver: zodResolver(quizSchema),
+  const form = useForm<z.infer<typeof contactSchema>>({
+    resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
       email: "",
       message: "",
     },
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  async function onSubmit(values: z.infer<typeof quizSchema>) {
-    console.log(values);
-    form.reset();
-    router.refresh();
+  async function onSubmit(values: z.infer<typeof contactSchema>) {
+    setIsSubmitting(true);
+
+    try {
+      const res = await axios.post("/api/feedback", values);
+
+      form.reset();
+      if (res.data.success) {
+        toast.success("Form Submitted");
+      } else {
+        toast.error("Failed to submit form");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again later.");
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -98,8 +125,17 @@ export function ContactForm() {
               </FormItem>
             )}
           />
-          <Button size="lg" className="h-12" type="submit">
-            Send Message
+          <Button
+            disabled={isSubmitting}
+            size="lg"
+            className="h-12"
+            type="submit"
+          >
+            {isSubmitting ? (
+              <span className="animate-pulse">Sending...</span> // Add loading text or spinner
+            ) : (
+              "Send Message"
+            )}
           </Button>
         </form>
       </Form>
