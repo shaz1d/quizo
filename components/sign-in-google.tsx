@@ -11,7 +11,7 @@ export default function SignInGoogle() {
         await signIn("google", { redirectTo: "/" });
       }}
     >
-      <Button variant="outline" className="w-full">
+      <Button size="lg" className="w-full">
         <Icons.google className="mr-2 h-4 w-4" />
         Google
       </Button>

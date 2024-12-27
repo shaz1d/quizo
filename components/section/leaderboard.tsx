@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 const Leaderboard = () => {
   return (
     <section className="w-full py-20">
-      <div className="grid grid-cols-2 gap-20 ">
+      <div className="grid lg:grid-cols-2 gap-20 ">
         <div className="flex justify-center items-center">
           <Image
             src="/leaderboard.png"
@@ -15,7 +15,7 @@ const Leaderboard = () => {
             quality={100}
           />
         </div>
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center text-center lg:text-left">
           <h2 className="text-4xl font-medium mb-6">
             Showcase Your Skills by <br />
             Climbing up the Leaderboard
@@ -25,7 +25,7 @@ const Leaderboard = () => {
             <br />
             at the top of the leaderboard.
           </p>
-          <div className="flex items-center gap-2 mt-5">
+          <div className="flex justify-center lg:justify-start items-center gap-2 mt-5">
             <Link href="/leaderboard">
               <Button>Leaderboard</Button>
             </Link>

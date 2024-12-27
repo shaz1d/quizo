@@ -81,9 +81,9 @@ export function UpdateQuizForm({ initialData }: Props) {
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Quiz Title</FormLabel>
               <FormControl>
-                <Input placeholder="Quiz Title" {...field} />
+                <Input className="h-12" placeholder="Quiz Title" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -104,12 +104,12 @@ export function UpdateQuizForm({ initialData }: Props) {
         <div>
           {fields.map((field, index) => (
             <div className="mb-4" key={field.id}>
-              <div className="flex justify-between items-center">
-                <h5 className="font-semibold">Question {index + 1}</h5>
+              <div className="flex justify-between items-center mb-2">
+                <h5 className="font-semibold text-2xl">Question {index + 1}</h5>
                 <Button
                   onClick={() => remove(index)}
                   type="button"
-                  variant="outline"
+                  variant="destructive"
                   size="icon"
                 >
                   <Trash className="size-4" />
@@ -123,7 +123,11 @@ export function UpdateQuizForm({ initialData }: Props) {
                   <FormItem>
                     <FormLabel>Question Title</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter the question" {...field} />
+                      <Input
+                        className="h-12"
+                        placeholder="Enter the question"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -139,7 +143,11 @@ export function UpdateQuizForm({ initialData }: Props) {
                       <FormItem>
                         <FormLabel>Option {i + 1}</FormLabel>
                         <FormControl>
-                          <Input placeholder={`Option ${i + 1}`} {...field} />
+                          <Input
+                            className="h-12"
+                            placeholder={`Option ${i + 1}`}
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -153,7 +161,11 @@ export function UpdateQuizForm({ initialData }: Props) {
                     <FormItem>
                       <FormLabel>Answer</FormLabel>
                       <FormControl>
-                        <Input placeholder="Answer" {...field} />
+                        <Input
+                          className="h-12"
+                          placeholder="Answer"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -166,7 +178,7 @@ export function UpdateQuizForm({ initialData }: Props) {
         <Button
           type="button"
           variant="outline"
-          className="w-full mb-4"
+          className="w-full mb-4 h-12"
           onClick={() =>
             append({
               question: "",
@@ -179,11 +191,18 @@ export function UpdateQuizForm({ initialData }: Props) {
         </Button>
         <div className="w-full flex justify-between items-center gap-5 mt-2 mb-6">
           <Link href="/dashboard/quizes">
-            <Button type="button" variant="secondary">
+            <Button
+              className="h-12"
+              size="lg"
+              type="button"
+              variant="secondary"
+            >
               Cancel
             </Button>
           </Link>
-          <Button type="submit">Update Quiz</Button>
+          <Button className="h-12" size="lg" type="submit">
+            Update Quiz
+          </Button>
         </div>
       </form>
     </Form>

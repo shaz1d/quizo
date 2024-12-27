@@ -19,12 +19,13 @@ type QuizProp = {
 };
 
 const PlayQuiz = ({ quiz }: QuizProp) => {
+  const Q_TIME = 30;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<
     Record<string, string>
   >({});
   const [isLoading, setIsLoading] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(quiz.questions.length * 30);
+  const [timeLeft, setTimeLeft] = useState(quiz.questions.length * Q_TIME);
   const router = useRouter();
 
   const handleOptionSelect = (questionId: string, option: string) => {
@@ -49,7 +50,7 @@ const PlayQuiz = ({ quiz }: QuizProp) => {
       const res = await axios.post("/api/check", {
         quizId: quiz.id,
         userAnswers,
-        timeTaken: quiz.questions.length * 10 - timeLeft,
+        timeTaken: quiz.questions.length * Q_TIME - timeLeft,
       });
 
       if (res.data.played) {

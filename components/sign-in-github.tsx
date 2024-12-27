@@ -11,7 +11,7 @@ export default function SignInGithub() {
         await signIn("github", { redirectTo: "/" });
       }}
     >
-      <Button variant="outline" className="w-full">
+      <Button size="lg" className="w-full">
         <Icons.gitHub className="mr-2 h-4 w-4" />
         Github
       </Button>

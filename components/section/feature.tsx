@@ -2,9 +2,9 @@ import { StarIcon } from "lucide-react";
 
 const Feature = () => {
   return (
-    <section className="w-full py-16">
-      <div className="grid grid-cols-2 gap-10 md:gap-20 container mx-auto">
-        <div className="flex flex-col gap-5 md:gap-20">
+    <section className="w-full py-16 ">
+      <div className="grid lg:grid-cols-2 gap-10 md:gap-20 container mx-auto">
+        <div className="flex flex-col gap-5 md:gap-20 text-center lg:text-left">
           <div>
             <h2 className="text-4xl font-medium mb-6">
               Discover the Easiest Way <br />
@@ -16,7 +16,7 @@ const Feature = () => {
               platform makes learning easy, fun, and effective.
             </p>
           </div>
-          <div className="flex gap-3 items-center">
+          <div className="flex gap-3 justify-center lg:justify-start items-center">
             <div className="size-10 rounded-sm bg-orange-400 flex items-center justify-center">
               <StarIcon />
             </div>

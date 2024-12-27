@@ -40,7 +40,7 @@ const ResultPage = async ({ params, searchParams }: Props) => {
   return (
     <>
       <section className="bg-slate-200 rounded-[32px] container mx-auto py-16  px-8 text-center">
-        <h1 className="text-6xl max-w-[620px] leading-[120%] mx-auto font-medium">
+        <h1 className="text-4xl lg:text-6xl max-w-[620px] leading-[120%] mx-auto font-medium">
           {newScore
             ? "You have already played this quiz"
             : "You have completed the quiz"}

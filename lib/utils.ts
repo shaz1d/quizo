@@ -17,3 +17,12 @@ export const formatTime = (seconds: number | string): string => {
     return `${minutes}m ${remainingSeconds}s`;
   }
 };
+
+export function truncateEmail(email: string, maxLength: number): string {
+  // Check if the email is longer than the maxLength
+  if (email.length > maxLength) {
+    // Truncate and append '...' at the end
+    return email.slice(0, maxLength) + "...";
+  }
+  return email;
+}

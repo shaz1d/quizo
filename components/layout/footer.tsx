@@ -5,13 +5,14 @@ import { Button } from "../ui/button";
 const Footer = () => {
   return (
     <footer className="w-full pt-10 align-bottom">
-      <div className="container mx-auto">
-        <div className="w-full flex justify-between pb-6 border-b border-primary/20">
+      <div className="container mx-auto px-5 md:px-0">
+        <div className="w-full flex flex-col md:flex-row justify-between pb-6 border-b border-primary/20">
           <div>
-            <Link href="/">
-              <Icons.newLogo className="size-10" />
+            <Link href="/" className="font-semibold text-xl flex items-center">
+              <Icons.newLogo className="size-10 mr-2" />
+              Quizo
             </Link>
-            <p className="font-semibold text-xl">Quizo</p>
+
             <div className="flex gap-10 mt-8">
               <div>
                 <p className="text-sm text-muted-foreground">Email</p>
@@ -23,7 +24,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div>
+          <div className="mt-6 md:mt-0">
             <p className="text-xl font-medium mb-6">
               Get Started with You Skills <br /> in Quiz Now!
             </p>

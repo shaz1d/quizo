@@ -3,10 +3,12 @@ import Link from "next/link";
 
 const page = () => {
   return (
-    <section className="py-20 w-full">
-      <div className="container mx-auto grid grid-cols-2 gap-10">
+    <section className="py-20 w-full px-5 md:px-0">
+      <div className="container mx-auto grid md:grid-cols-2 gap-10">
         <div className="flex flex-col ">
-          <h1 className="text-6xl leading-[120%] font-medium">Contact Us</h1>
+          <h1 className="text-4xl lg:text-6xl leading-[120%] font-medium">
+            Contact Us
+          </h1>
           <p className="mb-10 mt-1">
             Email, call or complete the form to learn how Quizo can solve
             <br />

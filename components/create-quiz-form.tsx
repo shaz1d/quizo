@@ -69,9 +69,9 @@ export function CreateQuizForm() {
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel>Quiz Title</FormLabel>
               <FormControl>
-                <Input placeholder="Quiz Title" {...field} />
+                <Input className="h-12" placeholder="Quiz Title" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -92,12 +92,12 @@ export function CreateQuizForm() {
         <div>
           {fields.map((field, index) => (
             <div className="mb-4" key={field.id}>
-              <div className="flex justify-between items-center">
-                <h5 className="font-semibold">Question {index + 1}</h5>
+              <div className="flex justify-between items-center mb-1">
+                <h5 className="font-semibold text-2xl">Question {index + 1}</h5>
                 <Button
                   onClick={() => remove(index)}
                   type="button"
-                  variant="outline"
+                  variant="destructive"
                   size="icon"
                 >
                   <Trash className="size-4" />
@@ -111,7 +111,11 @@ export function CreateQuizForm() {
                   <FormItem>
                     <FormLabel>Question Title</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter the question" {...field} />
+                      <Input
+                        className="h-12"
+                        placeholder="Enter the question"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -127,7 +131,11 @@ export function CreateQuizForm() {
                       <FormItem>
                         <FormLabel>Option {i + 1}</FormLabel>
                         <FormControl>
-                          <Input placeholder={`Option ${i + 1}`} {...field} />
+                          <Input
+                            className="h-12"
+                            placeholder={`Option ${i + 1}`}
+                            {...field}
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -141,7 +149,11 @@ export function CreateQuizForm() {
                     <FormItem>
                       <FormLabel>Answer</FormLabel>
                       <FormControl>
-                        <Input placeholder="Answer" {...field} />
+                        <Input
+                          className="h-12"
+                          placeholder="Answer"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -154,7 +166,7 @@ export function CreateQuizForm() {
         <Button
           type="button"
           variant="outline"
-          className="w-full mb-4"
+          className="w-full mb-4 h-12"
           onClick={() =>
             append({
               title: "",
@@ -167,11 +179,18 @@ export function CreateQuizForm() {
         </Button>
         <div className="w-full flex justify-between items-center gap-5 mt-2 mb-6">
           <Link href="/dashboard/quizes">
-            <Button type="button" variant="secondary">
+            <Button
+              size="lg"
+              className="h-12"
+              type="button"
+              variant="secondary"
+            >
               Cancel
             </Button>
           </Link>
-          <Button type="submit">Create Quiz</Button>
+          <Button size="lg" className="h-12" type="submit">
+            Create Quiz
+          </Button>
         </div>
       </form>
     </Form>

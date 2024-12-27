@@ -11,11 +11,12 @@ import {
 } from "./ui/dropdown-menu";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Menu } from "lucide-react";
 
 const UserContent = async () => {
   const session = await auth();
   return (
-    <>
+    <div className="flex items-center gap-2">
       {session?.user ? (
         <DropdownMenu>
           <DropdownMenuTrigger>
@@ -55,7 +56,23 @@ const UserContent = async () => {
           <Button>Log in</Button>
         </Link>
       )}
-    </>
+      <DropdownMenu>
+        <DropdownMenuTrigger className="md:hidden">
+          <Menu />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" alignOffset={-4}>
+          <DropdownMenuItem>
+            <Link href="/quiz">Play Quiz</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/leaderboard">Leaderboard</Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/contact">Contact</Link>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 };
 

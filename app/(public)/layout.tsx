@@ -9,7 +9,7 @@ const PublicLayout = ({
   return (
     <div className="w-full min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 relative">{children}</main>
       <Footer />
     </div>
   );

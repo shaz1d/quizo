@@ -4,10 +4,10 @@ const page = () => {
   return (
     <>
       <section className="bg-slate-200 rounded-[32px] container mx-auto py-20  px-8 text-center">
-        <h1 className="text-6xl max-w-[620px] leading-[120%] mx-auto font-medium">
+        <h1 className="text-4xl lg:text-6xl max-w-[620px] leading-[120%] mx-auto font-medium">
           Top Learners Worldwide
         </h1>
-        <p className="pt-2 pb-4 max-w-3xl mx-auto">
+        <p className="pt-2 pb-4 max-w-xl mx-auto">
           Check out the highest-scoring players across the globe. Compete
           globally and make your mark!
         </p>
